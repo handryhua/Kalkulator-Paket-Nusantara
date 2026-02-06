@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Paket Nusantara Sehat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            padding: 15px;
+            padding-bottom: 120px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #2c3e50, #4a6491);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+
+        th {
+            background-color: #4a6491;
+            color: white;
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        th:first-child {
+            border-top-left-radius: 10px;
+        }
+
+        th:last-child {
+            border-top-right-radius: 10px;
+        }
+
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #eaeaea;
+            vertical-align: middle;
+            font-size: 14px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9fafc;
+        }
+
+        tr:hover {
+            background-color: #f0f4ff;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-top: 3px;
+        }
+
+        .bcm { background-color: #e3f2fd; color: #1565c0; }
+        .bpm { background-color: #f3e5f5; color: #7b1fa2; }
+        .neb { background-color: #e8f5e9; color: #2e7d32; }
+        .eft { background-color: #fff3e0; color: #ef6c00; }
+        .tens { background-color: #fce4ec; color: #c2185b; }
+        .nocat { background-color: #f5f5f5; color: #616161; }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qty-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background-color: #4a6491;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .qty-btn:hover:not(:disabled) {
+            background-color: #3a5381;
+            transform: scale(1.05);
+        }
+
+        .qty-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .qty-input {
+            width: 50px;
+            padding: 6px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+            background-color: #f9f9f9;
+        }
+
+        .qty-input:disabled {
+            background-color: #f0f0f0;
+            color: #888;
+        }
+
+        .price {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .discount {
+            font-weight: 600;
+            color: #e74c3c;
+        }
+
+        .final-price {
+            font-weight: 700;
+            color: #27ae60;
+        }
+
+        .bonus-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .bonus-buttons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bonus-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: none;
+            background-color: #27ae60;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .bonus-btn:hover:not(:disabled) {
+            background-color: #219653;
+            transform: scale(1.05);
+        }
+
+        .bonus-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .max-notification {
+            font-size: 11px;
+            color: #666;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .floating-summary {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+            border-top: 1px solid #e0e0e0;
+            z-index: 100;
+            max-height: 30vh;
+            overflow-y: auto;
+        }
+
+        .summary-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+        }
+
+        .summary-item {
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #4a6491;
+        }
+
+        .summary-item.package {
+            border-left-color: #3498db;
+        }
+
+        .summary-item.final {
+            border-left-color: #9b59b6;
+        }
+
+        .summary-item.bonus {
+            border-left-color: #27ae60;
+        }
+
+        .summary-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        .summary-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .summary-value.bonus-balance {
+            color: #27ae60;
+        }
+
+        .summary-value.final-price {
+            color: #9b59b6;
+        }
+
+        .summary-value.package {
+            color: #3498db;
+        }
+
+        .conditions {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .condition-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            font-size: 13px;
+        }
+
+        .condition-met {
+            border-left: 3px solid #27ae60;
+        }
+
+        .condition-not-met {
+            border-left: 3px solid #e74c3c;
+        }
+
+        .condition-icon {
+            font-size: 16px;
+        }
+
+        .met { color: #27ae60; }
+        .not-met { color: #e74c3c; }
+
+        .bonus-info {
+            background-color: #e8f5e9;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #27ae60;
+        }
+
+        .bonus-info h3 {
+            color: #219653;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .bonus-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 8px;
+        }
+
+        .bonus-threshold {
+            background-color: white;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .threshold-value {
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .bonus-product {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        .purchased-row {
+            background-color: #f0f8ff !important;
+        }
+
+        .bonus-product-row {
+            background-color: #f9f9f9;
+        }
+
+        .bonus-icon {
+            color: #27ae60;
+            margin-left: 5px;
+        }
+
+        .product-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+                padding-bottom: 110px;
+            }
+            
+            .floating-summary {
+                padding: 12px;
+                max-height: 25vh;
+            }
+            
+            .summary-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .summary-item {
+                padding: 10px;
+            }
+            
+            .summary-value {
+                font-size: 16px;
+            }
+            
+            .summary-label {
+                font-size: 11px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            .subtitle {
+                font-size: 13px;
+            }
+            
+            th, td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .qty-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 14px;
+            }
+            
+            .qty-input {
+                width: 45px;
+                font-size: 13px;
+            }
+            
+            .conditions {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .bonus-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0;
+            }
+            
+            header {
+                padding: 12px;
+                border-radius: 8px;
+                margin-bottom: 15px;
+            }
+            
+            .table-container {
+                border-radius: 8px;
+            }
+            
+            .floating-summary {
+                padding: 10px;
+                max-height: 22vh;
+            }
+            
+            .summary-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            
+            .summary-item {
+                padding: 8px;
+            }
+            
+            .summary-value {
+                font-size: 15px;
+            }
+        }
+
+        .sku {
+            font-family: monospace;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 13px;
+        }
+
+        .bonus-qty-note {
+            font-size: 11px;
+            color: #666;
+            margin-top: 2px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-calculator"></i> Kalkulator Paket Nusantara Sehat</h1>
+            <p class="subtitle">Hitung harga, diskon, dan bonus dengan mudah</p>
+        </header>
+
+        <div class="conditions">
+            <div class="condition-indicator condition-not-met" id="condition-category">
+                <i class="fas fa-tags condition-icon not-met"></i>
+                <div>
+                    <div>2 Kategori Produk</div>
+                    <div class="condition-status">Belum terpenuhi</div>
+                </div>
+            </div>
+            <div class="condition-indicator condition-not-met" id="condition-total">
+                <i class="fas fa-coins condition-icon not-met"></i>
+                <div>
+                    <div>Total ≥ Rp 850.000</div>
+                    <div class="condition-status">Belum terpenuhi</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bonus-info" id="bonus-info" style="display: none;">
+            <h3><i class="fas fa-gift"></i> Bonus Belanja</h3>
+            <div class="bonus-list">
+                <div class="bonus-threshold">
+                    <span class="threshold-value">Rp 850.000</span>: 
+                    <span class="bonus-product">Adaptor 1 unit</span> atau 
+                    <span class="bonus-product">Mc246 2 unit</span>
+                </div>
+                <div class="bonus-threshold">
+                    <span class="threshold-value">Rp 2.550.000</span>: 
+                    <span class="bonus-product">HEM 7120 1 unit</span>
+                </div>
+                <div class="bonus-threshold">
+                    <span class="threshold-value">Rp 3.400.000</span>: 
+                    <span class="bonus-product">Nebu C801 1 unit</span>
+                </div>
+                <div class="bonus-threshold">
+                    <span class="threshold-value">Rp 4.250.000</span>: 
+                    <span class="bonus-product">Hem 7156T 1 unit</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table id="productTable">
+                <thead>
+                    <tr>
+                        <th width="10%">SKU</th>
+                        <th width="25%">Product</th>
+                        <th width="12%">Qty</th>
+                        <th width="12%">Price</th>
+                        <th width="12%">Discount</th>
+                        <th width="14%">Final Price</th>
+                        <th width="15%">Qty Bonus</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Data akan diisi oleh JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="floating-summary">
+        <div class="summary-content">
+            <div class="summary-item package">
+                <div class="summary-label">Total Package (×Rp 850.000)</div>
+                <div class="summary-value package" id="totalPackage">0</div>
+            </div>
+            <div class="summary-item">
+                <div class="summary-label">Total Price</div>
+                <div class="summary-value" id="totalPrice">Rp 0</div>
+            </div>
+            <div class="summary-item final">
+                <div class="summary-label">Total Final Price</div>
+                <div class="summary-value final-price" id="totalFinalPrice">Rp 0</div>
+                <div style="font-size: 11px; color: #666; margin-top: 3px;">termasuk PPN 11%</div>
+            </div>
+            <div class="summary-item bonus">
+                <div class="summary-label">Bonus Balance</div>
+                <div class="summary-value bonus-balance" id="bonusBalance">Rp 0</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data master produk
+        const products = [
+            { category: "BCM", sku: "8504", product: "HN-289-EBK", price: 227739, discount: 6.25 },
+            { category: "BCM", sku: "8091", product: "HBF-214-AP", price: 626316, discount: 16.67 },
+            { category: "BCM", sku: "6830", product: "HBF-375-AP", price: 1641320, discount: 11.00 },
+            { category: "BPM", sku: "8085", product: "HEM-7120-AP", price: 408000, discount: 20.00 },
+            { category: "BPM", sku: "E658", product: "HEM-7142T2-AP2", price: 412000, discount: 20.00 },
+            { category: "BPM", sku: "E250", product: "HEM-7156-AP", price: 577280, discount: 8.00 },
+            { category: "BPM", sku: "D526", product: "HEM-7156T-AP", price: 619500, discount: 8.00 },
+            { category: "BPM", sku: "E670", product: "HEM-7157-AP3[JPN750]", price: 702512, discount: 10.00 },
+            { category: "BPM", sku: "D239", product: "HEM-7156T-AAP", price: 783000, discount: 8.00 },
+            { category: "BPM", sku: "F140", product: "HEM-7383T1-AP", price: 1230000, discount: 6.25 },
+            { category: "BPM", sku: "E457", product: "HEM-7530T-AP3", price: 2492440, discount: 11.00 },
+            { category: "NEB", sku: "B292", product: "NE-C101-AP", price: 429250, discount: 10.00 },
+            { category: "NEB", sku: "7727", product: "NE-C801S-AP", price: 468500, discount: 11.00 },
+            { category: "NEB", sku: "D252", product: "NE-C28-C1", price: 619500, discount: 12.50 },
+            { category: "EFT", sku: "E245", product: "MC-246-AP4", price: 56880, discount: 5.80 },
+            { category: "EFT", sku: "E297", product: "MC-341-AP4", price: 59940, discount: 9.00 },
+            { category: "EFT", sku: "E089", product: "MC-343F-AP4", price: 78220, discount: 4.70 },
+            { category: "EFT", sku: "F139", product: "MC-F300-AP", price: 452000, discount: 9.00 },
+            { category: "EFT", sku: "8375", product: "MC-523-AP", price: 452153, discount: 7.00 },
+            { category: "TENS", sku: "B735", product: "HV-F013-AP4", price: 445493, discount: 14.00 },
+            { category: "No Category", sku: "6865", product: "ADAPTOR (BPM)", price: 0, discount: 0 }
+        ];
+
+        // Data bonus threshold
+        const bonusThresholds = [
+            { threshold: 850000, bonuses: [
+                {sku: "6865", product: "ADAPTOR (BPM)", qty: 1, step: 1, perUnitValue: 850000},
+                {sku: "E245", product: "MC-246-AP4", qty: 2, step: 2, perUnitValue: 425000}
+            ]},
+            { threshold: 2550000, bonuses: [
+                {sku: "8085", product: "HEM-7120-AP", qty: 1, step: 1, perUnitValue: 2550000}
+            ]},
+            { threshold: 3400000, bonuses: [
+                {sku: "7727", product: "NE-C801S-AP", qty: 1, step: 1, perUnitValue: 3400000}
+            ]},
+            { threshold: 4250000, bonuses: [
+                {sku: "D526", product: "HEM-7156T-AP", qty: 1, step: 1, perUnitValue: 4250000}
+            ]}
+        ];
+
+        // State aplikasi
+        let cart = {};
+        let bonusQty = {};
+        let purchaseOrder = [];
+        let availableBonusProducts = [];
+
+        // Inisialisasi cart
+        products.forEach(product => {
+            cart[product.sku] = {
+                ...product,
+                qty: 0,
+                finalPrice: 0,
+                appliedDiscount: 0,
+                isBonusProduct: false
+            };
+            bonusQty[product.sku] = 0;
+        });
+
+        // Format angka ke Rupiah
+        function formatRupiah(amount) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(amount);
+        }
+
+        // Hitung jumlah maksimum bonus yang tersedia
+        function calculateMaxBonusQty(sku) {
+            const bonusInfo = getBonusInfoForProduct(sku);
+            if (!bonusInfo) return 0;
+            
+            const totalPrice = calculateTotalPrice();
+            const bonusBalance = calculateBonusBalance();
+            
+            // Jika produk ini belum tersedia sebagai bonus (belum mencapai threshold)
+            if (!availableBonusProducts.includes(sku)) return 0;
+            
+            // Hitung berapa banyak bonus yang bisa diambil dari total price
+            const threshold = getProductThreshold(sku);
+            const packages = Math.floor(totalPrice / threshold);
+            
+            // Hitung maksimum berdasarkan bonus balance yang tersisa
+            const maxFromBalance = Math.floor(bonusBalance / bonusInfo.perUnitValue);
+            
+            // Untuk produk yang diberikan per package (misal: 2 Mc246 per 850.000)
+            const maxFromPackages = packages * bonusInfo.qty;
+            
+            // Ambil nilai terkecil antara kapasitas dari packages dan balance
+            const maxQty = Math.min(maxFromPackages, maxFromBalance);
+            
+            // Bulatkan ke kelipatan step
+            const roundedMax = Math.floor(maxQty / bonusInfo.step) * bonusInfo.step;
+            
+            return roundedMax;
+        }
+
+        // Urutkan produk berdasarkan logika yang diminta
+        function sortProducts() {
+            const totalPrice = calculateTotalPrice();
+            
+            // 1. Produk yang sudah dibeli (qty > 0) diurutkan berdasarkan urutan penambahan
+            const purchasedProducts = [];
+            purchaseOrder.forEach(sku => {
+                const product = products.find(p => p.sku === sku);
+                if (product && cart[sku].qty > 0) {
+                    purchasedProducts.push(product);
+                }
+            });
+            
+            // 2. Produk bonus yang tersedia (setelah produk yang dibeli)
+            const bonusProducts = [];
+            availableBonusProducts.forEach(sku => {
+                const product = products.find(p => p.sku === sku);
+                if (product && !purchasedProducts.some(p => p.sku === sku)) {
+                    bonusProducts.push(product);
+                }
+            });
+            
+            // 3. Produk lain yang belum dibeli dan bukan bonus, diurutkan default
+            const remainingProducts = products.filter(p => {
+                return !purchasedProducts.some(pp => pp.sku === p.sku) && 
+                       !bonusProducts.some(bp => bp.sku === p.sku);
+            });
+            
+            // Urutkan remainingProducts berdasarkan kategori dan nama produk
+            remainingProducts.sort((a, b) => {
+                if (a.category !== b.category) {
+                    const categoryOrder = ["BCM", "BPM", "NEB", "EFT", "TENS", "No Category"];
+                    return categoryOrder.indexOf(a.category) - categoryOrder.indexOf(b.category);
+                }
+                return a.product.localeCompare(b.product);
+            });
+            
+            // Gabungkan semua: produk dibeli + produk bonus + sisanya
+            return [...purchasedProducts, ...bonusProducts, ...remainingProducts];
+        }
+
+        // Update available bonus products berdasarkan total price
+        function updateAvailableBonusProducts(totalPrice) {
+            availableBonusProducts = [];
+            
+            // Tambahkan produk bonus berdasarkan threshold yang tercapai
+            bonusThresholds.forEach(bt => {
+                if (totalPrice >= bt.threshold) {
+                    bt.bonuses.forEach(bonus => {
+                        if (!availableBonusProducts.includes(bonus.sku)) {
+                            availableBonusProducts.push(bonus.sku);
+                        }
+                    });
+                }
+            });
+            
+            // Urutkan bonus products berdasarkan threshold (rendah ke tinggi)
+            availableBonusProducts.sort((a, b) => {
+                const thresholdA = getProductThreshold(a);
+                const thresholdB = getProductThreshold(b);
+                return thresholdA - thresholdB;
+            });
+        }
+
+        // Dapatkan threshold untuk produk bonus
+        function getProductThreshold(sku) {
+            for (const bt of bonusThresholds) {
+                for (const bonus of bt.bonuses) {
+                    if (bonus.sku === sku) {
+                        return bt.threshold;
+                    }
+                }
+            }
+            return Infinity;
+        }
+
+        // Render tabel produk
+        function renderTable() {
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+            
+            const sortedProducts = sortProducts();
+            const totalPrice = calculateTotalPrice();
+            const canUseBonusFlag = canUseBonus();
+            
+            sortedProducts.forEach((product, index) => {
+                const item = cart[product.sku];
+                const categoryClass = product.category.toLowerCase().replace(' ', '');
+                const isBonusProduct = availableBonusProducts.includes(product.sku);
+                const isPurchased = item.qty > 0;
+                
+                // Tentukan diskon yang berlaku
+                let discountPercentage = 0;
+                const hasPurchase = Object.values(cart).some(item => item.qty > 0);
+                const categories = new Set(Object.values(cart)
+                    .filter(item => item.qty > 0 && item.category !== 'No Category')
+                    .map(item => item.category));
+                const hasTwoCategories = categories.size >= 2;
+                const hasMinTotal = totalPrice >= 850000;
+                
+                if (hasPurchase && item.qty > 0) {
+                    discountPercentage = 2; // Diskon 2% jika ada pembelian
+                    
+                    if (hasTwoCategories && hasMinTotal) {
+                        discountPercentage = product.discount; // Diskon dari master
+                    }
+                }
+                
+                // Hitung final price per unit
+                const discountAmount = item.price * (discountPercentage / 100);
+                const priceAfterDiscount = item.price - discountAmount;
+                const tax = priceAfterDiscount * 0.11;
+                const finalPricePerUnit = priceAfterDiscount + tax;
+                const finalPriceTotal = item.qty * finalPricePerUnit;
+                
+                // Update item di cart
+                item.appliedDiscount = discountPercentage;
+                item.finalPrice = finalPriceTotal;
+                item.isBonusProduct = isBonusProduct;
+                
+                const row = document.createElement('tr');
+                
+                // Tambahkan kelas untuk baris yang dibeli
+                if (isPurchased) {
+                    row.classList.add('purchased-row');
+                } else if (isBonusProduct) {
+                    row.classList.add('bonus-product-row');
+                }
+                
+                // Dapatkan info bonus untuk produk ini
+                const bonusInfo = getBonusInfoForProduct(product.sku);
+                const bonusStep = bonusInfo ? bonusInfo.step : 1;
+                const currentBonusQty = bonusQty[product.sku] || 0;
+                const maxBonusQty = calculateMaxBonusQty(product.sku);
+                
+                row.innerHTML = `
+                    <td><span class="sku">${product.sku}</span></td>
+                    <td>
+                        <div class="product-name">${product.product}</div>
+                        <span class="category-badge ${categoryClass}">${product.category}</span>
+                    </td>
+                    <td>
+                        <div class="qty-controls">
+                            <button class="qty-btn" onclick="updateQty('${product.sku}', -1)" 
+                                ${product.category === 'No Category' ? 'disabled' : ''}>
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="text" class="qty-input" value="${item.qty}" readonly 
+                                ${product.category === 'No Category' ? 'disabled' : ''}>
+                            <button class="qty-btn" onclick="updateQty('${product.sku}', 1)" 
+                                ${product.category === 'No Category' ? 'disabled' : ''}>
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <td class="price">${formatRupiah(product.price)}</td>
+                    <td class="discount">${item.qty > 0 ? discountPercentage.toFixed(2) + '%' : '-'}</td>
+                    <td class="final-price">
+                        ${item.qty > 0 ? formatRupiah(finalPriceTotal) : '-'}
+                    </td>
+                    <td>
+                        ${isBonusProduct && canUseBonusFlag ? `
+                            <div class="bonus-controls">
+                                <div class="bonus-buttons">
+                                    <button class="bonus-btn" onclick="updateBonusQty('${product.sku}', -${bonusStep})" 
+                                        ${!canUseBonusFlag || !canAddBonus(product.sku, -bonusStep) ? 'disabled' : ''}>
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <span style="font-weight: 600; min-width: 30px; text-align: center;">${currentBonusQty}</span>
+                                    <button class="bonus-btn" onclick="updateBonusQty('${product.sku}', ${bonusStep})" 
+                                        ${!canUseBonusFlag || !canAddBonus(product.sku, bonusStep) ? 'disabled' : ''}>
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="max-notification">Maks. ${maxBonusQty}</div>
+                            </div>
+                        ` : ''}
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+            
+            updateSummary();
+            updateConditions();
+        }
+
+        // Dapatkan info bonus untuk produk tertentu
+        function getBonusInfoForProduct(sku) {
+            for (const bt of bonusThresholds) {
+                for (const bonus of bt.bonuses) {
+                    if (bonus.sku === sku) {
+                        return bonus;
+                    }
+                }
+            }
+            return null;
+        }
+
+        // Cek apakah bisa menambah/mengurangi bonus
+        function canAddBonus(sku, change) {
+            const bonusBalance = calculateBonusBalance();
+            const bonusInfo = getBonusInfoForProduct(sku);
+            
+            if (!bonusInfo) return false;
+            
+            const currentQty = bonusQty[sku] || 0;
+            const newQty = currentQty + change;
+            
+            // Tidak boleh kurang dari 0
+            if (newQty < 0) return false;
+            
+            // Tidak boleh lebih dari maksimum yang tersedia
+            const maxQty = calculateMaxBonusQty(sku);
+            if (newQty > maxQty) return false;
+            
+            // Hitung nilai bonus yang akan ditambahkan/dikurangi
+            const bonusValueChange = Math.abs(change) * bonusInfo.perUnitValue;
+            let newBonusBalance;
+            
+            if (change > 0) {
+                // Menambah bonus
+                newBonusBalance = bonusBalance - bonusValueChange;
+            } else {
+                // Mengurangi bonus
+                newBonusBalance = bonusBalance + bonusValueChange;
+            }
+            
+            // Bonus balance tidak boleh negatif saat menambah bonus
+            if (newBonusBalance < 0 && change > 0) return false;
+            
+            return true;
+        }
+
+        // Update quantity produk
+        function updateQty(sku, change) {
+            const product = cart[sku];
+            
+            // Adaptor tidak bisa diubah manual
+            if (product.category === 'No Category') return;
+            
+            const newQty = Math.max(0, product.qty + change);
+            
+            // Jika quantity berubah dari 0 ke > 0, tambahkan ke purchaseOrder
+            if (product.qty === 0 && newQty > 0 && !purchaseOrder.includes(sku)) {
+                purchaseOrder.push(sku);
+            }
+            
+            // Jika quantity berubah menjadi 0, hapus dari purchaseOrder
+            if (newQty === 0 && purchaseOrder.includes(sku)) {
+                const index = purchaseOrder.indexOf(sku);
+                if (index > -1) {
+                    purchaseOrder.splice(index, 1);
+                }
+            }
+            
+            cart[sku].qty = newQty;
+            
+            // Update available bonus products
+            const totalPrice = calculateTotalPrice();
+            updateAvailableBonusProducts(totalPrice);
+            
+            renderTable();
+        }
+
+        // Update quantity bonus
+        function updateBonusQty(sku, change) {
+            if (!canUseBonus()) return;
+            
+            if (!canAddBonus(sku, change)) return;
+            
+            const currentQty = bonusQty[sku] || 0;
+            const newQty = Math.max(0, currentQty + change);
+            bonusQty[sku] = newQty;
+            
+            renderTable();
+        }
+
+        // Cek apakah bonus bisa digunakan
+        function canUseBonus() {
+            const categories = new Set(Object.values(cart)
+                .filter(item => item.qty > 0 && item.category !== 'No Category')
+                .map(item => item.category));
+            const totalPrice = calculateTotalPrice();
+            
+            return categories.size >= 2 && totalPrice >= 850000;
+        }
+
+        // Hitung total price (harga sebelum diskon dan PPN)
+        function calculateTotalPrice() {
+            return Object.values(cart).reduce((total, item) => {
+                return total + (item.price * item.qty);
+            }, 0);
+        }
+
+        // Hitung total final price (setelah diskon dan PPN)
+        function calculateTotalFinalPrice() {
+            return Object.values(cart).reduce((total, item) => {
+                return total + item.finalPrice;
+            }, 0);
+        }
+
+        // Hitung bonus balance
+        function calculateBonusBalance() {
+            const totalPrice = calculateTotalPrice();
+            let bonusValue = 0;
+            
+            // Hitung nilai bonus yang diambil
+            Object.keys(bonusQty).forEach(sku => {
+                const qty = bonusQty[sku] || 0;
+                if (qty > 0) {
+                    const bonusInfo = getBonusInfoForProduct(sku);
+                    if (bonusInfo) {
+                        bonusValue += qty * bonusInfo.perUnitValue;
+                    }
+                }
+            });
+            
+            return Math.max(0, totalPrice - bonusValue);
+        }
+
+        // Update summary
+        function updateSummary() {
+            const totalPrice = calculateTotalPrice();
+            const totalFinalPrice = calculateTotalFinalPrice();
+            const bonusBalance = calculateBonusBalance();
+            
+            // Hitung total package
+            const categories = new Set(Object.values(cart)
+                .filter(item => item.qty > 0 && item.category !== 'No Category')
+                .map(item => item.category));
+            const hasTwoCategories = categories.size >= 2;
+            const totalPackage = hasTwoCategories ? Math.floor(totalPrice / 850000) : 0;
+            
+            document.getElementById('totalPrice').textContent = formatRupiah(totalPrice);
+            document.getElementById('totalFinalPrice').textContent = formatRupiah(totalFinalPrice);
+            document.getElementById('totalPackage').textContent = totalPackage;
+            document.getElementById('bonusBalance').textContent = formatRupiah(bonusBalance);
+        }
+
+        // Update kondisi
+        function updateConditions() {
+            const categories = new Set(Object.values(cart)
+                .filter(item => item.qty > 0 && item.category !== 'No Category')
+                .map(item => item.category));
+            const totalPrice = calculateTotalPrice();
+            
+            const categoryCondition = document.getElementById('condition-category');
+            const totalCondition = document.getElementById('condition-total');
+            const bonusInfo = document.getElementById('bonus-info');
+            
+            // Update kondisi kategori
+            if (categories.size >= 2) {
+                categoryCondition.className = 'condition-indicator condition-met';
+                categoryCondition.querySelector('.condition-status').textContent = 'Terpenuhi';
+            } else {
+                categoryCondition.className = 'condition-indicator condition-not-met';
+                categoryCondition.querySelector('.condition-status').textContent = 
+                    `Belum terpenuhi (${categories.size}/2)`;
+            }
+            
+            // Update kondisi total
+            if (totalPrice >= 850000) {
+                totalCondition.className = 'condition-indicator condition-met';
+                totalCondition.querySelector('.condition-status').textContent = 'Terpenuhi';
+            } else {
+                totalCondition.className = 'condition-indicator condition-not-met';
+                totalCondition.querySelector('.condition-status').textContent = 
+                    `Rp ${formatRupiah(totalPrice).replace('Rp', '')}`;
+            }
+            
+            // Tampilkan info bonus jika kondisi terpenuhi
+            if (categories.size >= 2 && totalPrice >= 850000) {
+                bonusInfo.style.display = 'block';
+            } else {
+                bonusInfo.style.display = 'none';
+            }
+        }
+
+        // Inisialisasi
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTable();
+        });
+    </script>
+</body>
+</html>
