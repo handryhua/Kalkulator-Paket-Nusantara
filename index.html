@@ -16,7 +16,7 @@
         body {
             background-color: #f5f7fa;
             color: #333;
-            padding: 15px;
+            padding: 12px;
             padding-bottom: 120px;
         }
 
@@ -27,63 +27,63 @@
 
         header {
             text-align: center;
-            margin-bottom: 20px;
-            padding: 15px;
+            margin-bottom: 15px;
+            padding: 12px;
             background: linear-gradient(135deg, #2c3e50, #4a6491);
             color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
         }
 
         h1 {
-            font-size: 20px;
-            margin-bottom: 6px;
+            font-size: 18px;
+            margin-bottom: 5px;
         }
 
         .subtitle {
-            font-size: 14px;
+            font-size: 13px;
             opacity: 0.9;
         }
 
         .table-container {
             overflow-x: auto;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+            margin-bottom: 12px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 900px;
+            min-width: 700px;
         }
 
         th {
             background-color: #4a6491;
             color: white;
-            padding: 12px 10px;
+            padding: 10px 8px;
             text-align: left;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             position: sticky;
             top: 0;
             z-index: 10;
         }
 
         th:first-child {
-            border-top-left-radius: 10px;
+            border-top-left-radius: 8px;
         }
 
         th:last-child {
-            border-top-right-radius: 10px;
+            border-top-right-radius: 8px;
         }
 
         td {
-            padding: 12px 10px;
+            padding: 10px 8px;
             border-bottom: 1px solid #eaeaea;
             vertical-align: middle;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         tr:nth-child(even) {
@@ -96,11 +96,12 @@
 
         .category-badge {
             display: inline-block;
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-size: 10px;
+            padding: 1px 5px;
+            border-radius: 8px;
+            font-size: 9px;
             font-weight: 600;
-            margin-top: 3px;
+            margin-top: 2px;
+            margin-right: 5px;
         }
 
         .bcm { background-color: #e3f2fd; color: #1565c0; }
@@ -110,20 +111,37 @@
         .tens { background-color: #fce4ec; color: #c2185b; }
         .nocat { background-color: #f5f5f5; color: #616161; }
 
-        .qty-controls {
+        .discount-badge {
+            display: inline-block;
+            padding: 1px 5px;
+            border-radius: 8px;
+            font-size: 9px;
+            font-weight: 600;
+            background-color: #ffebee;
+            color: #c62828;
+            margin-top: 2px;
+        }
+
+        .qty-section {
             display: flex;
-            align-items: center;
+            flex-direction: column;
             gap: 8px;
         }
 
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
         .qty-btn {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             border: none;
             background-color: #4a6491;
             color: white;
-            font-size: 16px;
+            font-size: 14px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -142,12 +160,12 @@
         }
 
         .qty-input {
-            width: 50px;
-            padding: 6px;
+            width: 45px;
+            padding: 5px;
             text-align: center;
             border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
+            border-radius: 4px;
+            font-size: 13px;
             font-weight: 600;
             background-color: #f9f9f9;
         }
@@ -157,42 +175,30 @@
             color: #888;
         }
 
-        .price {
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        .discount {
-            font-weight: 600;
-            color: #e74c3c;
-        }
-
-        .final-price {
-            font-weight: 700;
-            color: #27ae60;
+        .bonus-section {
+            margin-top: 5px;
         }
 
         .bonus-controls {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 5px;
+            gap: 4px;
         }
 
         .bonus-buttons {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .bonus-btn {
-            width: 30px;
-            height: 30px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             border: none;
             background-color: #27ae60;
             color: white;
-            font-size: 14px;
+            font-size: 12px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -211,10 +217,11 @@
         }
 
         .max-notification {
-            font-size: 11px;
+            font-size: 10px;
             color: #666;
             text-align: center;
             font-style: italic;
+            line-height: 1.2;
         }
 
         .floating-summary {
@@ -223,11 +230,11 @@
             left: 0;
             right: 0;
             background: white;
-            padding: 15px;
-            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+            padding: 12px;
+            box-shadow: 0 -3px 10px rgba(0,0,0,0.1);
             border-top: 1px solid #e0e0e0;
             z-index: 100;
-            max-height: 30vh;
+            max-height: 25vh;
             overflow-y: auto;
         }
 
@@ -235,15 +242,15 @@
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
         }
 
         .summary-item {
             background: #f8fafc;
-            padding: 12px;
-            border-radius: 8px;
-            border-left: 4px solid #4a6491;
+            padding: 10px;
+            border-radius: 6px;
+            border-left: 3px solid #4a6491;
         }
 
         .summary-item.package {
@@ -259,13 +266,13 @@
         }
 
         .summary-label {
-            font-size: 12px;
+            font-size: 11px;
             color: #666;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
 
         .summary-value {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             color: #2c3e50;
         }
@@ -284,32 +291,32 @@
 
         .conditions {
             display: flex;
-            gap: 12px;
-            margin-bottom: 15px;
+            gap: 10px;
+            margin-bottom: 12px;
             flex-wrap: wrap;
         }
 
         .condition-indicator {
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 8px 12px;
+            gap: 5px;
+            padding: 6px 10px;
             background-color: white;
-            border-radius: 6px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-            font-size: 13px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            font-size: 12px;
         }
 
         .condition-met {
-            border-left: 3px solid #27ae60;
+            border-left: 2px solid #27ae60;
         }
 
         .condition-not-met {
-            border-left: 3px solid #e74c3c;
+            border-left: 2px solid #e74c3c;
         }
 
         .condition-icon {
-            font-size: 16px;
+            font-size: 14px;
         }
 
         .met { color: #27ae60; }
@@ -317,29 +324,29 @@
 
         .bonus-info {
             background-color: #e8f5e9;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            border-left: 4px solid #27ae60;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            border-left: 3px solid #27ae60;
         }
 
         .bonus-info h3 {
             color: #219653;
-            margin-bottom: 8px;
-            font-size: 16px;
+            margin-bottom: 6px;
+            font-size: 14px;
         }
 
         .bonus-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 8px;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 6px;
         }
 
         .bonus-threshold {
             background-color: white;
-            padding: 8px;
-            border-radius: 5px;
-            font-size: 12px;
+            padding: 6px;
+            border-radius: 4px;
+            font-size: 11px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
@@ -363,89 +370,36 @@
 
         .bonus-icon {
             color: #27ae60;
-            margin-left: 5px;
+            margin-left: 4px;
         }
 
         .product-name {
             font-weight: 600;
             color: #2c3e50;
+            font-size: 13px;
+        }
+
+        .price-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-value {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 13px;
+        }
+
+        .final-price-value {
+            font-weight: 700;
+            color: #27ae60;
+            font-size: 13px;
         }
 
         @media (max-width: 768px) {
             body {
-                padding: 12px;
-                padding-bottom: 110px;
-            }
-            
-            .floating-summary {
-                padding: 12px;
-                max-height: 25vh;
-            }
-            
-            .summary-content {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-            
-            .summary-item {
                 padding: 10px;
-            }
-            
-            .summary-value {
-                font-size: 16px;
-            }
-            
-            .summary-label {
-                font-size: 11px;
-            }
-            
-            h1 {
-                font-size: 18px;
-            }
-            
-            .subtitle {
-                font-size: 13px;
-            }
-            
-            th, td {
-                padding: 10px 8px;
-                font-size: 13px;
-            }
-            
-            .qty-btn {
-                width: 28px;
-                height: 28px;
-                font-size: 14px;
-            }
-            
-            .qty-input {
-                width: 45px;
-                font-size: 13px;
-            }
-            
-            .conditions {
-                flex-direction: column;
-                gap: 8px;
-            }
-            
-            .bonus-list {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0;
-            }
-            
-            header {
-                padding: 12px;
-                border-radius: 8px;
-                margin-bottom: 15px;
-            }
-            
-            .table-container {
-                border-radius: 8px;
+                padding-bottom: 110px;
             }
             
             .floating-summary {
@@ -463,7 +417,96 @@
             }
             
             .summary-value {
-                font-size: 15px;
+                font-size: 14px;
+            }
+            
+            .summary-label {
+                font-size: 10px;
+            }
+            
+            h1 {
+                font-size: 16px;
+            }
+            
+            .subtitle {
+                font-size: 12px;
+            }
+            
+            th, td {
+                padding: 8px 6px;
+                font-size: 12px;
+            }
+            
+            .qty-btn {
+                width: 26px;
+                height: 26px;
+                font-size: 12px;
+            }
+            
+            .qty-input {
+                width: 40px;
+                font-size: 12px;
+            }
+            
+            .bonus-btn {
+                width: 24px;
+                height: 24px;
+                font-size: 11px;
+            }
+            
+            .bonus-list {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                min-width: 650px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0;
+            }
+            
+            header {
+                padding: 10px;
+                border-radius: 6px;
+                margin-bottom: 12px;
+            }
+            
+            .table-container {
+                border-radius: 6px;
+            }
+            
+            .floating-summary {
+                padding: 8px;
+                max-height: 20vh;
+            }
+            
+            .summary-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+            }
+            
+            .summary-item {
+                padding: 6px;
+            }
+            
+            .summary-value {
+                font-size: 13px;
+            }
+            
+            .summary-label {
+                font-size: 9px;
+            }
+            
+            .conditions {
+                flex-direction: column;
+                gap: 6px;
+            }
+            
+            table {
+                min-width: 600px;
             }
         }
 
@@ -471,14 +514,17 @@
             font-family: monospace;
             font-weight: 600;
             color: #2c3e50;
-            font-size: 13px;
+            font-size: 12px;
         }
-
-        .bonus-qty-note {
-            font-size: 11px;
-            color: #666;
-            margin-top: 2px;
-            display: block;
+        
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        input[type="number"] {
+            -moz-appearance: textfield;
         }
     </style>
 </head>
@@ -534,12 +580,10 @@
                 <thead>
                     <tr>
                         <th width="10%">SKU</th>
-                        <th width="25%">Product</th>
-                        <th width="12%">Qty</th>
-                        <th width="12%">Price</th>
-                        <th width="12%">Discount</th>
-                        <th width="14%">Final Price</th>
-                        <th width="15%">Qty Bonus</th>
+                        <th width="35%">Product</th>
+                        <th width="25%">Qty</th>
+                        <th width="15%">Price</th>
+                        <th width="15%">Final Price</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
@@ -562,7 +606,7 @@
             <div class="summary-item final">
                 <div class="summary-label">Total Final Price</div>
                 <div class="summary-value final-price" id="totalFinalPrice">Rp 0</div>
-                <div style="font-size: 11px; color: #666; margin-top: 3px;">termasuk PPN 11%</div>
+                <div style="font-size: 10px; color: #666; margin-top: 2px;">termasuk PPN 11%</div>
             </div>
             <div class="summary-item bonus">
                 <div class="summary-label">Bonus Balance</div>
@@ -813,41 +857,49 @@
                         <span class="category-badge ${categoryClass}">${product.category}</span>
                     </td>
                     <td>
-                        <div class="qty-controls">
-                            <button class="qty-btn" onclick="updateQty('${product.sku}', -1)" 
-                                ${product.category === 'No Category' ? 'disabled' : ''}>
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <input type="text" class="qty-input" value="${item.qty}" readonly 
-                                ${product.category === 'No Category' ? 'disabled' : ''}>
-                            <button class="qty-btn" onclick="updateQty('${product.sku}', 1)" 
-                                ${product.category === 'No Category' ? 'disabled' : ''}>
-                                <i class="fas fa-plus"></i>
-                            </button>
+                        <div class="qty-section">
+                            <div class="qty-controls">
+                                <button class="qty-btn" onclick="updateQty('${product.sku}', -1)" 
+                                    ${product.category === 'No Category' ? 'disabled' : ''}>
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <input type="number" min="0" class="qty-input" value="${item.qty}" 
+                                    onchange="updateQtyManual('${product.sku}', this.value)"
+                                    ${product.category === 'No Category' ? 'disabled' : ''}>
+                                <button class="qty-btn" onclick="updateQty('${product.sku}', 1)" 
+                                    ${product.category === 'No Category' ? 'disabled' : ''}>
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            ${isBonusProduct && canUseBonusFlag ? `
+                                <div class="bonus-section">
+                                    <div class="bonus-controls">
+                                        <div class="max-notification">Bonus</div>
+                                        <div class="bonus-buttons">
+                                            <button class="bonus-btn" onclick="updateBonusQty('${product.sku}', -${bonusStep})" 
+                                                ${!canUseBonusFlag || !canAddBonus(product.sku, -bonusStep) ? 'disabled' : ''}>
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                            <span style="font-weight: 600; min-width: 25px; text-align: center; font-size: 12px;">${currentBonusQty}</span>
+                                            <button class="bonus-btn" onclick="updateBonusQty('${product.sku}', ${bonusStep})" 
+                                                ${!canUseBonusFlag || !canAddBonus(product.sku, bonusStep) ? 'disabled' : ''}>
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
+                                        <div class="max-notification">Maks. ${maxBonusQty}</div>
+                                    </div>
+                                </div>
+                            ` : ''}
                         </div>
                     </td>
-                    <td class="price">${formatRupiah(product.price)}</td>
-                    <td class="discount">${item.qty > 0 ? discountPercentage.toFixed(2) + '%' : '-'}</td>
-                    <td class="final-price">
-                        ${item.qty > 0 ? formatRupiah(finalPriceTotal) : '-'}
-                    </td>
                     <td>
-                        ${isBonusProduct && canUseBonusFlag ? `
-                            <div class="bonus-controls">
-                                <div class="bonus-buttons">
-                                    <button class="bonus-btn" onclick="updateBonusQty('${product.sku}', -${bonusStep})" 
-                                        ${!canUseBonusFlag || !canAddBonus(product.sku, -bonusStep) ? 'disabled' : ''}>
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                    <span style="font-weight: 600; min-width: 30px; text-align: center;">${currentBonusQty}</span>
-                                    <button class="bonus-btn" onclick="updateBonusQty('${product.sku}', ${bonusStep})" 
-                                        ${!canUseBonusFlag || !canAddBonus(product.sku, bonusStep) ? 'disabled' : ''}>
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                                <div class="max-notification">Maks. ${maxBonusQty}</div>
-                            </div>
-                        ` : ''}
+                        <div class="price-info">
+                            <div class="price-value">${formatRupiah(product.price)}</div>
+                            ${item.qty > 0 ? `<span class="discount-badge">Diskon ${discountPercentage.toFixed(2)}%</span>` : ''}
+                        </div>
+                    </td>
+                    <td class="final-price-value">
+                        ${item.qty > 0 ? formatRupiah(finalPriceTotal) : '-'}
                     </td>
                 `;
                 
@@ -905,7 +957,7 @@
             return true;
         }
 
-        // Update quantity produk
+        // Update quantity produk via tombol
         function updateQty(sku, change) {
             const product = cart[sku];
             
@@ -913,6 +965,25 @@
             if (product.category === 'No Category') return;
             
             const newQty = Math.max(0, product.qty + change);
+            
+            updateQtyInternal(sku, newQty);
+        }
+
+        // Update quantity produk manual via input
+        function updateQtyManual(sku, value) {
+            const product = cart[sku];
+            
+            // Adaptor tidak bisa diubah manual
+            if (product.category === 'No Category') return;
+            
+            const newQty = Math.max(0, parseInt(value) || 0);
+            
+            updateQtyInternal(sku, newQty);
+        }
+
+        // Internal function untuk update quantity
+        function updateQtyInternal(sku, newQty) {
+            const product = cart[sku];
             
             // Jika quantity berubah dari 0 ke > 0, tambahkan ke purchaseOrder
             if (product.qty === 0 && newQty > 0 && !purchaseOrder.includes(sku)) {
