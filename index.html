@@ -377,6 +377,7 @@
             background-color: #f9f9f9 !important;
         }
 
+        /* ===== MOBILE DENSITY ===== */
         @media (max-width: 768px) {
             body {
                 padding: 8px;
@@ -384,16 +385,97 @@
             }
             
             .floating-summary {
-                padding: 12px;
+                padding: 8px 8px 6px;
+                max-height: 18vh;
+                overflow: hidden;
             }
             
             .summary-content {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+            }
+            
+            .summary-item {
+                padding: 6px;
+                border-left-width: 3px;
+            }
+            
+            .summary-label {
+                font-size: 9px;
+                margin-bottom: 2px;
             }
             
             .summary-value {
-                font-size: 16px;
+                font-size: 13px;
+                font-weight: 700;
+            }
+            
+            table {
+                min-width: 100%;
+            }
+            
+            td, th {
+                padding: 6px 5px;
+                font-size: 12px;
+            }
+            
+            .product-name {
+                font-size: 13px;
+                line-height: 1.2;
+            }
+            
+            .sku {
+                font-size: 10px;
+            }
+            
+            .category-badge {
+                font-size: 9px;
+                padding: 2px 6px;
+            }
+            
+            .qty-controls {
+                gap: 4px;
+            }
+            
+            .qty-btn {
+                width: 26px;
+                height: 26px;
+                font-size: 12px;
+            }
+            
+            .qty-input {
+                width: 40px;
+                font-size: 12px;
+                padding: 4px;
+            }
+            
+            .bonus-controls {
+                padding: 6px;
+                margin-top: 6px;
+            }
+            
+            .bonus-header {
+                font-size: 11px;
+                margin-bottom: 4px;
+            }
+            
+            .bonus-btn {
+                width: 24px;
+                height: 24px;
+                font-size: 11px;
+            }
+            
+            .price-value {
+                font-size: 12px;
+            }
+            
+            .discount-info {
+                font-size: 10px;
+                padding: 2px 6px;
+            }
+            
+            .final-price-value {
+                font-size: 12px;
             }
             
             h1 {
@@ -410,6 +492,11 @@
             
             .bonus-list {
                 grid-template-columns: 1fr;
+            }
+            
+            .bonus-info-panel {
+                font-size: 12px;
+                padding: 10px;
             }
         }
 
@@ -477,9 +564,9 @@
             <table id="productTable">
                 <thead>
                     <tr>
-                        <th width="35%">Product</th>
-                        <th width="25%">Qty</th>
-                        <th width="40%">Price</th>
+                        <th width="30%">Product</th>
+                        <th width="20%">Qty</th>
+                        <th width="50%">Price</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
