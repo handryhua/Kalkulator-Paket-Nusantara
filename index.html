@@ -56,8 +56,13 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 650px;
+            table-layout: fixed; /* 🔥 KUNCI UTAMA */
         }
+
+        /* ===== COLUMN CONTROL ===== */
+        .col-product { width: 33.33%; }
+        .col-qty { width: 33.33%; }
+        .col-price { width: 33.33%; }
 
         th {
             background-color: #4a6491;
@@ -78,6 +83,11 @@
             font-size: 14px;
         }
 
+        /* Prevent content from stretching columns */
+        td > div {
+            max-width: 100%;
+        }
+
         tr:nth-child(even) {
             background-color: #f9fafc;
         }
@@ -90,6 +100,7 @@
             display: flex;
             flex-direction: column;
             gap: 5px;
+            overflow: hidden;
         }
 
         .sku {
@@ -104,6 +115,8 @@
             color: #2c3e50;
             font-size: 15px;
             line-height: 1.4;
+            white-space: normal;
+            word-break: break-word;
         }
 
         .category-badge {
@@ -127,6 +140,7 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            overflow: hidden;
         }
 
         .qty-btn {
@@ -333,6 +347,7 @@
             display: flex;
             flex-direction: column;
             gap: 5px;
+            overflow: hidden;
         }
 
         .price-value {
@@ -411,12 +426,12 @@
             }
             
             table {
-                min-width: 100%;
+                min-width: 0;
             }
             
             td, th {
-                padding: 6px 5px;
-                font-size: 12px;
+                padding: 5px 4px;
+                font-size: 11px;
             }
             
             .product-name {
@@ -438,44 +453,48 @@
             }
             
             .qty-btn {
-                width: 26px;
-                height: 26px;
-                font-size: 12px;
-            }
-            
-            .qty-input {
-                width: 40px;
-                font-size: 12px;
-                padding: 4px;
-            }
-            
-            .bonus-controls {
-                padding: 6px;
-                margin-top: 6px;
-            }
-            
-            .bonus-header {
-                font-size: 11px;
-                margin-bottom: 4px;
-            }
-            
-            .bonus-btn {
                 width: 24px;
                 height: 24px;
                 font-size: 11px;
             }
             
+            .qty-input {
+                width: 36px;
+                font-size: 11px;
+                padding: 4px;
+            }
+            
+            .bonus-controls {
+                padding: 5px;
+                margin-top: 6px;
+            }
+            
+            .bonus-header {
+                font-size: 10px;
+                margin-bottom: 4px;
+            }
+            
+            .bonus-btn {
+                width: 22px;
+                height: 22px;
+                font-size: 10px;
+            }
+            
+            .price-info {
+                gap: 3px;
+            }
+            
             .price-value {
-                font-size: 12px;
+                font-size: 11px;
             }
             
             .discount-info {
-                font-size: 10px;
+                font-size: 9px;
                 padding: 2px 6px;
             }
             
             .final-price-value {
-                font-size: 12px;
+                font-size: 11px;
             }
             
             h1 {
@@ -497,6 +516,14 @@
             .bonus-info-panel {
                 font-size: 12px;
                 padding: 10px;
+            }
+            
+            .container {
+                padding: 0;
+            }
+            
+            .table-container {
+                border-radius: 6px;
             }
         }
 
@@ -564,9 +591,9 @@
             <table id="productTable">
                 <thead>
                     <tr>
-                        <th width="30%">Product</th>
-                        <th width="20%">Qty</th>
-                        <th width="50%">Price</th>
+                        <th class="col-product">Product</th>
+                        <th class="col-qty">Qty</th>
+                        <th class="col-price">Price</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
