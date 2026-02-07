@@ -68,12 +68,19 @@
             background-color: #4a6491;
             color: white;
             padding: 12px 8px;
-            text-align: left;
+            text-align: center; /* ✅ HEADER CENTER */
             font-weight: 600;
             font-size: 14px;
             position: sticky;
             top: 0;
             z-index: 10;
+            vertical-align: middle;
+        }
+
+        /* Header Qty & Price tidak tergeser oleh isi */
+        th.col-product, th.col-qty, th.col-price {
+            text-align: center;
+            vertical-align: middle;
         }
 
         td {
@@ -81,6 +88,11 @@
             border-bottom: 1px solid #eaeaea;
             vertical-align: middle;
             font-size: 14px;
+        }
+
+        /* Center isi kolom Qty */
+        td:nth-child(2) {
+            text-align: center;
         }
 
         /* Prevent content from stretching columns */
@@ -139,6 +151,7 @@
         .qty-controls {
             display: flex;
             align-items: center;
+            justify-content: center; /* ✅ CENTER */
             gap: 6px;
             overflow: hidden;
         }
@@ -171,7 +184,7 @@
         .qty-input {
             width: 50px;
             padding: 6px;
-            text-align: center;
+            text-align: center; /* ✅ angka benar-benar center */
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 14px;
@@ -259,6 +272,11 @@
             padding: 12px;
             border-radius: 8px;
             border-left: 4px solid #4a6491;
+        }
+
+        .package-active {
+            border-left-color: #27ae60 !important;
+            background: linear-gradient(135deg, #f0f9f0, #e6f7e6);
         }
 
         .summary-label {
@@ -605,13 +623,12 @@
 
     <div class="floating-summary">
         <div class="summary-content">
-            <div class="summary-item" style="border-left-color: #3498db;">
-                <div class="summary-label">Total Package</div>
+            <div class="summary-item" id="packageIndicator" style="border-left-color: #e74c3c;">
+                <div class="summary-label">
+                    Total Package
+                    <span id="packageStatus" style="font-size:10px; display:block;">❌ Syarat belum terpenuhi</span>
+                </div>
                 <div class="summary-value" id="totalPackage">0</div>
-            </div>
-            <div class="summary-item" style="border-left-color: #8e44ad;">
-                <div class="summary-label">Total Qty</div>
-                <div class="summary-value" id="totalQty">0</div>
             </div>
             <div class="summary-item" style="border-left-color: #4a6491;">
                 <div class="summary-label">Total Price</div>
@@ -992,7 +1009,6 @@
             const bonusBalanceValue = Math.max(0, totalPrice - usedThresholdValue);
             
             document.getElementById('totalPackage').textContent = totalPackages;
-            document.getElementById('totalQty').textContent = totalQty();
             document.getElementById('totalPrice').textContent = formatRupiah(totalPrice);
             document.getElementById('totalFinalPrice').textContent = formatRupiah(totalFinalPrice);
             document.getElementById('bonusBalance').textContent = formatRupiah(bonusBalanceValue);
@@ -1012,6 +1028,8 @@
             const categoryCondition = document.getElementById('condition-category');
             const totalCondition = document.getElementById('condition-total');
             const bonusInfo = document.getElementById('bonus-info');
+            const packageBox = document.getElementById('packageIndicator');
+            const packageStatus = document.getElementById('packageStatus');
             
             if (categories.size >= 2) {
                 categoryCondition.className = 'condition-indicator condition-met';
@@ -1033,8 +1051,12 @@
             
             if (categories.size >= 2 && totalPrice >= 850000) {
                 bonusInfo.style.display = 'block';
+                packageBox.classList.add('package-active');
+                packageStatus.innerHTML = '✅ 2 Kategori & ≥ Rp 850.000';
             } else {
                 bonusInfo.style.display = 'none';
+                packageBox.classList.remove('package-active');
+                packageStatus.innerHTML = '❌ Syarat belum terpenuhi';
             }
         }
 
